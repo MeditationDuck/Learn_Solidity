@@ -1,4 +1,4 @@
-const { expect, assert } = require("chai");
+const { expect } = require("chai");
 
 describe("MyToken and MyTokenUser", function() {
   let myToken, myTokenUser, owner, addr1;
@@ -17,7 +17,9 @@ describe("MyToken and MyTokenUser", function() {
   it("myToken should have 10000 of ether", async function(){
     // await myToken.transfer(myTokenUser.address, ethers.utils.parseEther("10000"));
 
-    assert.equal((await myTokenUser.getMyBalance()).toString(), ethers.utils.parseEther("10000").toString());
+    // assert.equal((await myTokenUser.getMyBalance()).toString(), ethers.utils.parseEther("10000").toString());
+    expect((await myTokenUser.getMyBalance()).toString()).to.equal(ethers.utils.parseEther("10000").toString());
+
   });
   
 
@@ -28,8 +30,11 @@ describe("MyToken and MyTokenUser", function() {
     // await myTokenUser.transferTo(addr1.address, ethers.utils.parseEther('50'));
 
     // Check final balances
-    assert.equal((await myTokenUser.getMyBalance()).toString(), ethers.utils.parseEther("9950").toString());
+    // assert.equal((await myTokenUser.getMyBalance()).toString(), ethers.utils.parseEther("9950").toString());
+    expect((await myTokenUser.getMyBalance()).toString()).to.equal(ethers.utils.parseEther("9950").toString());
 
-    assert.equal((await myToken.balanceOf(addr1.address)).toString(), ethers.utils.parseEther("50").toString());
+    expect((await myToken.balanceOf(addr1.address)).toString()).to.equal(ethers.utils.parseEther("50").toString());
+
+    // assert.equal((await myToken.balanceOf(addr1.address)).toString(), ethers.utils.parseEther("50").toString());
   });
 });
